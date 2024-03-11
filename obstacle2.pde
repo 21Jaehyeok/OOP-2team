@@ -1,4 +1,23 @@
 void obstacle2(float x, float y, float d){
   fill(255,0,0);
-  circle(x,y,d);
+  beginShape();
+  fill(255,255,0);
+  vertex(x,y-d*4);
+  vertex(x+d*1,y-d*1.5);
+  vertex(x+d*3.5,y-d*1.5);
+  vertex(x+d*1.5,y);
+  vertex(x+d*2.5,y+d*2.5);
+  vertex(x,y+d*1.5);
+  vertex(x-d*2.5,y+d*2.5);
+  vertex(x-d*1.5,y);
+  vertex(x-d*3.5,y-d*1.5);
+  vertex(x-d*1,y-d*1.5);
+  stroke(0.0,255);
+  endShape();
+ fill(0);
+  ellipse(x-d*0.5,y-d*0.25,d*0.5,d*1);
+  ellipse(x+d*0.5,y-d*0.25,d*0.5,d*1);
+  fill(255,255,255);
+  ellipse(x-d*0.5,y-d*0.335,0.25*d,d*0.5);
+  ellipse(x+d*0.5,y-d*0.355,0.25*d,d*0.5);
 }
