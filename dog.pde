@@ -1,3 +1,4 @@
+//Kim Jaehyeok
 void dog(float x,float y,float d){
   fill(255,180,100);  //ears
   ellipse(x-6*d,y-6*d,4*d,8*d);  
