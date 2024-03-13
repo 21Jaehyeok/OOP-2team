@@ -3,7 +3,7 @@ float [] a,b,c,vy;  //obstacles
 int keepText1, keepText2 = 0;
 void setup(){
   size(800, 600);
-  x=50;  y=50;  d=5;  //Character's size
+  x=40;  y=300;  d=5;  //Character's size
   a= new float[10];
   b= new float[10];
   c= new float[10];
@@ -63,7 +63,7 @@ void dieText(){
   fill(255,0,0);
   textSize(100);
   text("Die",300,300);
-  x=50;  y=50;
+  x=40;  y=300;
 }
 void goalText(){
   keepText2--;
