@@ -12,6 +12,7 @@ void obstacle2(float x, float y, float d){
   vertex(x-d*1.5,y);
   vertex(x-d*3.5,y-d*1.5);
   vertex(x-d*1,y-d*1.5);
+  vertex(x,y-d*4)
   stroke(0.0,255);
   endShape();
  fill(0);
