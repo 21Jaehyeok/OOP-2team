@@ -1,0 +1,14 @@
+#include <iostream>
+using namespace std;
+void main() {
+	float a, b, x, dx, anal, num;
+	cout << "a,b ? =";
+	cin >> a >> b;
+	cout << "x, dx ? =";
+	cin >> x >> dx;
+	anal = a * b * cos(b * x);
+	num = (a * sin(b * x + b * dx) - a * sin(b * x)) / dx;
+	cout << "num=" << num << endl;
+	cout << "anal=" << anal << endl;
+	cout << "error = " << (num - anal) / anal * 100 << "%\n";
+}
