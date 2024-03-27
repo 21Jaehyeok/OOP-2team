@@ -4,7 +4,7 @@ using namespace std;
 const float PI = 3.141592;
 int main() {
 	float f, t, T, dt;
-	f = 220;
+	f = 110;
 	T = (1 / f) * 3;
 	dt = (1 / f) / 20;
 	ofstream xxx;
