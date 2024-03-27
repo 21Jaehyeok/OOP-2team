@@ -1,0 +1,19 @@
+#include <fstream>
+#include <iostream>
+using namespace std;
+const float PI = 3.141592;
+int main() {
+	float f, t, T, dt;
+	f = 220;
+	T = (1 / f) * 3;
+	dt = (1 / f) / 20;
+	ofstream xxx;
+	xxx.open("graphout.txt");
+	if (!xxx) { cout << "can not open filen\n"; return 4; }
+	for (t = 0; t < T; t += dt) {
+		xxx << t << " " << 100 * cos(20 * PI * t) * cos(220 * PI * t) 
+			<< " " << 60 * sin(240 * PI * t) + 80 * sin(220 * PI * t) << endl;
+	}
+	xxx.close();
+	return 1;
+}
