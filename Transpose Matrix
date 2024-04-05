@@ -1,0 +1,52 @@
+#include <iostream>
+
+using namespace std;
+
+int main() {
+    int m, n;
+    cout << "행렬의 행 수를 입력하세요: ";
+    cin >> m;
+    cout << "행렬의 열 수를 입력하세요: ";
+    cin >> n;
+
+    int** A = new int* [m];
+    for (int i = 0; i < m; i++) {
+        A[i] = new int[n];
+    }
+
+    //행렬에 값 입력
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < n; j++) {
+            cout << "A[" << i << "][" << j << "] = ";
+            cin >> A[i][j];
+        }
+    }
+
+    // 전치행렬 선언 및 초기화
+    int** B = new int* [n];
+    for (int i = 0; i < n; i++) {
+        B[i] = new int[m];
+    }
+
+    // 전치행렬 계산
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < n; j++) {
+            B[j][i] = A[i][j];
+        }
+    }
+
+    // 전치행렬 출력
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            cout << B[i][j] << " ";
+        }
+        cout << endl;
+    }
+    // 메모리 해제
+    
+    delete[] A;
+    
+    delete[] B;
+
+    return 0;
+}
