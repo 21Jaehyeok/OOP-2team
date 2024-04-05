@@ -1,59 +1,68 @@
-// 행렬곱셈 1차원배열
 #include <iostream>
 using namespace std;
-void main() {
-	// matrix in 1D
-	int N = 2, M = 3, NM;
-	float A[] = { 1,2,3,4,5,6 }, * B, * C;
-	B = new float[N * M];
-	C = new float[N * M];
-	B[0] = 1; B[1] = 0; B[2] = 1;
-	B[3] = 0; B[4] = 2; B[5] = 3;
-	// C = A * B
-	for (int n = 0; n < N; n++) {
-		for (int m = 0; m < M; m++) {
-			C[n * M + m] = A[n * M + m] * B[n * M + m];
-		}
-	}
-	// show results
-	for (int n = 0; n < N; n++) {
-		for (int m = 0; m < M; m++) {
-			cout << C[n * M + m] << "  ";
-		}
-		cout << endl;
-	}
-	delete[]  B;
-	delete[] C;
-}
+// 1D array
+int main() {
+    float A[] = {1,2,3,4,5,6,7,8,9}, *B, *C;
+    B = new float[3 * 3];
+    C = new float[3 * 3];
+    B[0] = 7; B[1] = 8; B[2] = 9;
+    B[3] = 4; B[4] = 5; B[5] = 6;
+    B[6] = 1; B[7] = 2; B[8] = 3;
+
+    for (int i = 0; i < 9; ++i) {
+        C[i] = 0.0;
+    }
+
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            for (int k = 0; k < 3; k++) {
+                C[3 * i + j] += A[3 * i + k] * B[3 * k + j];
+            }
+        }
+    }
+
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            cout << C[3 * i + j] << " ";
+        }
+        cout << endl;
+    }
+    delete[] B;
+    delete[] C;
 
 
-//행렬곱셈 2차원배열
+
 #include <iostream>
 using namespace std;
-void main() {
-	// matrix in 2D
-	int N = 2, M = 3, NM;
-	float A[2][3] = { {1,2,3},{4,5,6} }, ** B, ** C;
-	B = new float* [N];
-	for (int n = 0; n < N; n++) B[n] = new float[M];
-	C = new float* [N];
-	for (int n = 0; n < N; n++) C[n] = new float[M];
-	B[0][0] = 1; B[0][1] = 0; B[0][2] = 2;
-	B[1][0] = 0; B[1][1] = 2; B[1][2] = 3;
-	// C = A * B
-	for (int n = 0; n < N; n++) {
-		for (int m = 0; m < M; m++) {
-			C[n][m] = A[n][m] * B[n][m];
-		}
-	}
-	// show results
-	for (int n = 0; n < N; n++) {
-		for (int m = 0; m < M; m++) {
-			cout << C[n][m] << "  ";
-		}
-		cout << endl;
-	}
-	for (int n = 0; n < N; n++) { delete[] B[n]; delete C[n]; }
-	delete[] B;
-	delete[] C;     //  delete은 new의 역순
+// 2D array
+int main() {
+    float A[3][3] = { {1,2,3}, {4,5,6}, {7,8,9} }, **B, **C;
+    B = new float*[3];
+    for (int i = 0; i < 3; ++i) B[i] = new float[3];
+    C = new float*[3];
+    for (int i = 0; i < 3; ++i) {
+        C[i] = new float[3];
+        for (int j = 0; j < 3; ++j) {
+            C[i][j] = 0.0;
+        }
+    }
+    B[0][0] = 7; B[0][1] = 8; B[0][2] = 9;
+    B[1][0] = 4; B[1][1] = 5; B[1][2] = 6;
+    B[2][0] = 1; B[2][1] = 2; B[2][2] = 3;
+
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            for (int k = 0; k < 3; k++) {
+                C[i][j] += A[i][k] * B[k][j];
+            }
+        }
+    }
+
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            cout << C[i][j] << " ";
+        }
+        cout << endl;
+    }
+    return 0;
 }
