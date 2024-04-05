@@ -1,0 +1,55 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+using namespace std;
+
+int main() {
+    int n = 20, N = 10000; 
+    float p = 1.0 / 6.0; 
+    float* getheory = new float[n + 1]; // 이론값 저장
+    float* geex = new float[n + 1]; // 실험값 저장
+    int* count = new int[n + 1]; // 6이 나온 횟수 저장
+
+    // 초기화
+    for (int i = 0; i <= n; ++i) {
+        geex[i] = 0.0;
+        getheory[i] = 0.0;
+        count[i] = 0;
+    }
+
+    // 이론적 확률 계산
+    getheory[1] = p;
+    for (int k = 2; k <= n; ++k) {
+        getheory[k] = getheory[k - 1] * (1 - p);
+    }
+
+    // 실험적 확률 계산
+    for (int i = 0; i < N; ++i) {
+        int k;
+        for (k = 0; k < n; ++k) {
+            int roll = rand() % 6 + 1; // 주사위를 던져 나온 값
+            if (roll == 6) {
+                count[k]++;
+                break;
+            }
+        }
+    }
+
+    // 실험 결과를 확률로 변환
+    for (int k = 0; k < n; ++k) {
+        geex[k] = (float)count[k] / N;
+    }
+
+    // 결과 저장
+    ofstream xxx("geometric.txt");
+    for (int k = 0; k < n; ++k) {
+        xxx << k + 1 << " " << getheory[k + 1] << " " << geex[k] << endl;
+    }
+    xxx.close();
+
+    delete[] geex;
+    delete[] getheory;
+    delete[] count;
+
+    return 0;
+}
