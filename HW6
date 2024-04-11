@@ -1,0 +1,83 @@
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+float getLength(int eumpyo) {
+    float T;
+    if (eumpyo == 4) T = 0.5;
+    else if (eumpyo == 8) T = 0.25;
+    else if (eumpyo == 2) T = 1.0;
+    return T;
+}
+
+float getfrequency(char gyemyung) {
+    float f;
+    if (gyemyung == 'c') f = 261.63f;
+    else if (gyemyung == 'D') f = 293.66f;
+    else if (gyemyung == 'E') f = 329.63f;
+    else if (gyemyung == 'F') f = 349.23f;
+    else if (gyemyung == 'G') f = 392.00f;
+    else if (gyemyung == 'A') f = 440.00f;
+    else if (gyemyung == 'B') f = 493.88f;
+    else if (gyemyung == 'C') f = 523.25f;
+    return f;
+}
+
+int getAmplitude(int ss) {
+    return ss * 1000;
+}
+
+int main() {
+    ifstream xx("my.wav", ios::binary | ios::in);
+    if (!xx) return 333;  // if the file is not found
+    char header[100];
+    xx.read(header, 100);
+    xx.close();
+    int* sampleRate = (int*)(header + 24);
+    cout << "sampleRate = " << *sampleRate << endl;
+    short* n;   n = (short*)(header + 22); 
+    int* fs;   fs = (int*)(header + 24);  
+    int* b;   b = (int*)(header + 28);  
+    *n = 1;  // mono
+
+    ifstream zz("akbo.txt", ios::binary | ios::in);
+    if (!zz) return 666;
+    int num;
+    zz >> num;
+    
+    ofstream yy("music.wav", ios::binary | ios::out); 
+    if (!yy) return 999;
+    yy.write(header, 100); 
+    
+    for (int i = 0; i < num; ++i) {
+        int eu, ss;
+        char hh;
+        zz >> eu >> hh >> ss;
+        float f = getfrequency(hh); 
+        int a = getAmplitude(ss); 
+        float T = getLength(eu); 
+
+        int N = fs[0] * T; // number of samples for 1 second
+        short* data;
+        data = new short[N]; // allocate memory for 1 seconds mono
+
+        const float pi = 3.141592f;
+        float t = 0;
+        float dt = 1.0 / 44100;
+
+        ofstream yy("music.wav", ios::binary | ios::app);
+        if (!yy) return 999;
+        yy.write(header, 100);
+        
+        for (int j = 0; j < N; j++, t += dt) {
+            data[j] = (short)(a * sin(2.0 * pi * f * t));
+        }
+        yy.write((char*)data, N * sizeof(short));
+        delete[] data;
+    }
+
+    zz.close();
+    yy.close();
+
+    return 0;
+}
