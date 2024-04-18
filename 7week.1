@@ -1,6 +1,8 @@
 #include <iostream>
 #include <fstream>
 using namespace std;
+int num[4] = { 1, 2, 3, 4 };
+float number[3] = { -0.5,0,0.5 };
 int multiply(int a) {
 	return 5 * a;
 }
@@ -11,15 +13,16 @@ float square(float b) {
 int main() {
 	int a;
 	ofstream xx("mybin.dat", ios::binary | ios::out);
-	xx.write((char*)1234, sizeof(int));
+	xx.write((char*)num, sizeof(int)*4);
 	for (int i = 0; i < 5; i++) {
 		cout << "1000에서 5000사이의 숫자를 입력하시오  ";
 		cin >> a ;
 		// a의 조건을 추가하고싶음
 		xx.write((char*)multiply(a), sizeof(int));
 	}
-	for (float i = -0.5; i < 2; i += 0.5) {
-		xx.write((char*)square(i), sizeof(float));
+	for (int i = 0; i < 3; i++) {
+		number[i] = multiply(number[i]);
+		xx.write((char*)number, sizeof(float));
 		//float를 char*로 바꾸는 방법
 		}
 }
