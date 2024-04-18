@@ -1,18 +1,18 @@
 #include <iostream>
 #include <fstream>
 using namespace std;
-int a[11]; //4*11=44byte
+float a[12]; //4*12=44byte
 int b;
-int c[5];
+int c[5];//1000~5000사이 숫자
 float d[] = {-0.5, 0 , 0.5};
 int num[4] = { 1, 2, 3, 4 };
 
-int multiply(int n, int *k, int *m) {
+void multiply(int n, float *k, int *m) {
 	for (int i = 0; i < n; i++) {
-		*(k + i) = c[i]*5;
+		*(k + i) = m[i]*5;
 	}
 }
-float square(int n, int* k, float* m) {
+void square(int n, float* k, float* m) {
 	for (int i = 0; i < n; i++) {
 		*(k + i) = m[i]*m[i];
 	//int 포인터 float 포인터로 해야하는가
@@ -28,10 +28,10 @@ void main() {
 		cin >> b;
 		c[i] = b;
 	}
-	multiply(5, a + 4, c);
-	square(3, a + 9, d);
+	multiply(5, (a + 4), c);
+	square(3, (a + 9), d);
 
 	ofstream xx("mybin.dat", ios :: binary | ios :: out);
-	xx.write((char*)a, 44);
+	xx.write((char*)a, 48);
 }
 
