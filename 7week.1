@@ -1,0 +1,25 @@
+#include <iostream>
+#include <fstream>
+using namespace std;
+int multiply(int a) {
+	return 5 * a;
+}
+float square(float b) {
+	return b * b;
+}
+
+int main() {
+	int a;
+	ofstream xx("mybin.dat", ios::binary | ios::out);
+	xx.write((char*)1234, sizeof(int));
+	for (int i = 0; i < 5; i++) {
+		cout << "1000에서 5000사이의 숫자를 입력하시오  ";
+		cin >> a ;
+		// a의 조건을 추가하고싶음
+		xx.write((char*)multiply(a), sizeof(int));
+	}
+	for (float i = -0.5; i < 2; i += 0.5) {
+		xx.write((char*)square(i), sizeof(float));
+		//float를 char*로 바꾸는 방법
+		}
+}
