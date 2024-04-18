@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 using namespace std;
+int num[4] = { 1, 2, 3, 4 };
 int b;
 int multiply(int n,int*k) {
 	for (int i = 0; i < n; i++) {
@@ -12,7 +13,6 @@ float square(int n, float* k) {
 		k[i] *= k[i];
 	}
 }
-
 void main() {
 	int a[5];
 	float c[3] = { -0.5, 0, 0.5 };
@@ -25,7 +25,7 @@ void main() {
 	multiply(5, a);
 	square(3, c);
 	ofstream xx("mybin.dat", ios::binary | ios::out);
-	xx.write((char*)1234, 4);
+	xx.write((char*)num, sizeof(int)*4);
 	xx.write((char*)a, sizeof(int) * 5);
 	xx.write((char*)c, sizeof(float) * 3);
 }
