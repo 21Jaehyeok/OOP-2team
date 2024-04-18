@@ -31,5 +31,7 @@ void main() {
 
 	ofstream xx("mybin.dat", ios :: binary | ios :: out);
 	xx.write((char*)a, 48);
+
+ 	xx.close();
 }
 
