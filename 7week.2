@@ -1,0 +1,31 @@
+#include <iostream>
+#include <fstream>
+using namespace std;
+int b;
+int multiply(int n,int*k) {
+	for (int i = 0; i < n; i++) {
+		k[i] *= 5;
+	}
+}
+float square(int n, float* k) {
+	for (int i = 0; i < n; i++) {
+		k[i] *= k[i];
+	}
+}
+
+void main() {
+	int a[5];
+	float c[3] = { -0.5, 0, 0.5 };
+	for (int i = 0; i < 5; i++) {
+		cout << "1000에서 5000사이의 숫자를 입력하시오  ";
+		cin >> b;
+		a[i] = b;
+	}
+
+	multiply(5, a);
+	square(3, c);
+	ofstream xx("mybin.dat", ios::binary | ios::out);
+	xx.write((char*)1234, 4);
+	xx.write((char*)a, sizeof(int) * 5);
+	xx.write((char*)c, sizeof(float) * 3);
+}
