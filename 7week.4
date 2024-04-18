@@ -34,33 +34,32 @@ void All() {
 
     xx.close();
 
+
+    //reading
     ifstream yy("mybin.dat", ios::binary | ios::in);
     if (!yy) cout << "Fail" << endl;
 
-    yy.read((char*)(&num), sizeof(num));
-    cout << "num: ";
-    for (int i = 0; i < 4; ++i) {
-        cout << " " << num[i];
-    }
-    cout << endl;
+    int read_num[4];
+    int read_int_data[5];
+    float read_float_data[3];
 
-    yy.read((char*)(&int_data), sizeof(int_data));
-    cout << "int_data:";
-    for (int i = 0; i < 5; ++i) {
-        cout << " " << int_data[i];
-    }
-    cout << endl;
-
-    yy.read((char*)(&float_data), sizeof(float_data));
-    cout << "float_data:";
-    for (int i = 0; i < 3; ++i) {
-        cout << " " << float_data[i];
-    }
-    cout << endl;
-
+    yy.read((char*)(&read_num), sizeof(read_num));
+    yy.read((char*)(&read_int_data), sizeof(read_int_data));
+    yy.read((char*)(&read_float_data), sizeof(read_float_data));
     yy.close();
 
-
+    for (int i = 0; i < 4; ++i) {
+        cout << " " << read_num[i];
+    }
+    cout << endl;
+    for (int i = 0; i < 5; ++i) {
+        cout << " " << read_int_data[i];
+    }
+    cout << endl;
+    for (int i = 0; i < 3; ++i) {
+        cout << " " << read_float_data[i];
+    }
+    cout << endl;
 }
 
 int main() {
