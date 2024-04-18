@@ -1,0 +1,34 @@
+#include <iostream>
+#include <fstream>
+using namespace std;
+int a[11]; //4*11=44byte
+int b;
+int c[5];
+float d[] = {-0.5, 0 , 0.5};
+
+int multiply(int n, int *k, int *m) {
+	for (int i = 0; i < n; i++) {
+		*(k + i) = c[i]*5;
+	}
+}
+float square(int n, int* k, float* m) {
+	for (int i = 0; i < n; i++) {
+		*(k + i) = m[i]*m[i];
+	//int 포인터 float 포인터로 해야하는가
+	}
+}
+
+void main() {
+	a[0] = 1234;
+	for (int i = 0; i < 5; i++) {
+		cout << "1000에서 5000사이의 숫자를 입력하시오  ";
+		cin >> b;
+		c[i] = b;
+	}
+	multiply(5, a + 1, c);
+	square(3, a + 6, d);
+
+	ofstream xx("mybin.dat", ios :: binary | ios :: out);
+	xx.write((char*)a, 44);
+}
+
