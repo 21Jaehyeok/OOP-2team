@@ -1,0 +1,41 @@
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+void multiplyByFive(int* data, int n) {
+    for (int i = 0; i < n; i++) {
+        data[i] *= 5;
+    }
+}
+
+void calculatePowers(float* data, int n) {
+    for (int i = 0; i < n; i++) {
+        data[i] = data[i] * data[i];
+    }
+}
+
+void All() {
+    int num[4] = { 1, 2, 3, 4 };
+    int int_data[5] = { 1000, 2000, 3000, 4000, 5000 };
+    float float_data[3];
+    for (int i = 0; i < 3; ++i) {
+        float_data[i] = -0.5 + i * 0.5;
+    }
+
+    multiplyByFive(int_data, 5);
+    calculatePowers(float_data, 3);
+
+    ofstream xx("mybin.dat", ios::binary | ios::out);
+    if (!xx) cout << "Fail" << endl;
+
+    xx.write((char*)(&num), 4 * sizeof(int));
+    xx.write((char*)(&int_data), 5 * sizeof(int));
+    xx.write((char*)(&float_data), 3 * sizeof(float));
+
+    xx.close();
+}
+
+int main() {
+    All();
+    return 1;
+}
