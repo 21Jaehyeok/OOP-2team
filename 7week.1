@@ -2,7 +2,8 @@
 #include <fstream>
 using namespace std;
 int num[4] = { 1, 2, 3, 4 };
-float number[3] = { -0.5,0,0.5 };
+float number[3] = { -0.5, 0, 0.5 };
+
 int multiply(int a) {
 	return 5 * a;
 }
@@ -11,18 +12,51 @@ float square(float b) {
 }
 
 int main() {
-	int a;
+	int a[5];
 	ofstream xx("mybin.dat", ios::binary | ios::out);
-	xx.write((char*)num, sizeof(int)*4);
+	xx.write((char*)num, sizeof(int) * 4);
 	for (int i = 0; i < 5; i++) {
 		cout << "1000에서 5000사이의 숫자를 입력하시오  ";
-		cin >> a ;
-		// a의 조건을 추가하고싶음
-		xx.write((char*)multiply(a), sizeof(int));
+		cin >> a[i];
+		if (a[i] < 1000 || a[i]>5000) {
+			cout << "1000에서 5000사이의 숫자가 아닙니다" << endl;
+			return 6;
+		}
+		int result = multiply(a[i]);
+		xx.write((char*)(&result), sizeof(int));
 	}
 	for (int i = 0; i < 3; i++) {
-		number[i] = multiply(number[i]);
-		xx.write((char*)number, sizeof(float));
-		//float를 char*로 바꾸는 방법
-		}
+		number[i] = square(number[i]);
+		xx.write((char*)(& number[i]), sizeof(float));
+	}
+
+	xx.close();
+
+	//reading
+	ifstream yy("mybin.dat", ios::binary | ios::in);
+	if (!yy) cout << "Fail" << endl;
+
+	int read_num[4];
+	int read_int_data[5];
+	float read_float_data[3];
+
+	yy.read((char*)(&read_num), sizeof(read_num));
+	yy.read((char*)(&read_int_data), sizeof(read_int_data));
+	yy.read((char*)(&read_float_data), sizeof(read_float_data));
+	yy.close();
+
+	for (int i = 0; i < 4; ++i) {
+		cout << " " << read_num[i];
+	}
+	cout << endl;
+	for (int i = 0; i < 5; ++i) {
+		cout << " " << read_int_data[i];
+	}
+	cout << endl;
+	for (int i = 0; i < 3; ++i) {
+		cout << " " << read_float_data[i];
+	}
+	cout << endl;
+
+	return 1;
 }
