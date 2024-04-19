@@ -14,9 +14,17 @@ void square(float* data, int n) {
     }
 }
 
-void All() {
+int All() {
     int num[4] = { 1, 2, 3, 4 };
-    int int_data[5] = { 1000, 2000, 3000, 4000, 5000 };
+    int int_data[5];
+    for (int i = 0; i < 5; i++) {
+        cout << "1000에서 5000사이의 숫자를 입력하시오  ";
+        cin >> int_data[i];
+        if (int_data[i] < 1000 || int_data[i]>5000) {
+            cout << "1000에서 5000사이의 숫자가 아닙니다" << endl;
+            return 6;
+        }
+    }
     float float_data[3];
     for (int i = 0; i < 3; ++i) {
         float_data[i] = -0.5 + i * 0.5;
@@ -62,6 +70,10 @@ void All() {
     cout << endl;
 }
 
+int main() {
+        All();
+        return 1;
+ }
 int main() {
     All();
     return 1;
