@@ -4,28 +4,60 @@ using namespace std;
 int num[4] = { 1, 2, 3, 4 };
 int a[5];
 float c[3] = { -0.5, 0, 0.5 };
-void multiply(int n,int *k) {
+void multiply(int n, int* k) {
 	for (int i = 0; i < n; i++) {
 		k[i] *= 5;
 	}
 }
 void square(int n, float* k) {
 	for (int i = 0; i < n; i++) {
-		k[i] =k[i]*k[i];
+		k[i] = k[i] * k[i];
 	}
 }
 int main() {
 	for (int i = 0; i < 5; i++) {
 		cout << "1000에서 5000사이의 숫자를 입력하시오  ";
 		cin >> a[i];
+		if (a[i] < 1000 || a[i]>5000) {
+			cout << "1000에서 5000사이의 숫자가 아닙니다" << endl;
+			return 6;
+		}
 	}
 
 	multiply(5, a);
 	square(3, c);
 	ofstream xx("mybin.dat", ios::binary | ios::out);
-	xx.write((char*)num, sizeof(int)*4);
+	xx.write((char*)num, sizeof(int) * 4);
 	xx.write((char*)a, sizeof(int) * 5);
 	xx.write((char*)c, sizeof(float) * 3);
 
- 	xx.close();
+	xx.close();
+
+	//reading
+	ifstream yy("mybin.dat", ios::binary | ios::in);
+	if (!yy) cout << "Fail" << endl;
+
+	int read_num[4];
+	int read_int_data[5];
+	float read_float_data[3];
+
+	yy.read((char*)(&read_num), sizeof(read_num));
+	yy.read((char*)(&read_int_data), sizeof(read_int_data));
+	yy.read((char*)(&read_float_data), sizeof(read_float_data));
+	yy.close();
+
+	for (int i = 0; i < 4; ++i) {
+		cout << " " << read_num[i];
+	}
+	cout << endl;
+	for (int i = 0; i < 5; ++i) {
+		cout << " " << read_int_data[i];
+	}
+	cout << endl;
+	for (int i = 0; i < 3; ++i) {
+		cout << " " << read_float_data[i];
+	}
+	cout << endl;
+
+	return 1;
 }
